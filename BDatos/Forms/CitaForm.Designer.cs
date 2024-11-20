@@ -49,9 +49,13 @@
             ServData = new DataGridView();
             label6 = new Label();
             label7 = new Label();
+            label9 = new Label();
+            EspacioUp = new NumericUpDown();
+            LimpiarBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)CitasData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ServiciosAgreData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ServData).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EspacioUp).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -96,10 +100,12 @@
             CitasData.AllowUserToDeleteRows = false;
             CitasData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             CitasData.Location = new Point(401, 74);
+            CitasData.MultiSelect = false;
             CitasData.Name = "CitasData";
             CitasData.ReadOnly = true;
             CitasData.Size = new Size(437, 284);
             CitasData.TabIndex = 5;
+            CitasData.SelectionChanged += CitasData_SelectionChanged;
             // 
             // ServiciosAgreData
             // 
@@ -120,6 +126,7 @@
             InsertBtn.TabIndex = 7;
             InsertBtn.Text = "Insertar";
             InsertBtn.UseVisualStyleBackColor = true;
+            InsertBtn.Click += InsertBtn_Click;
             // 
             // UpdateBtn
             // 
@@ -129,6 +136,7 @@
             UpdateBtn.TabIndex = 8;
             UpdateBtn.Text = "Modificar";
             UpdateBtn.UseVisualStyleBackColor = true;
+            UpdateBtn.Click += UpdateBtn_Click;
             // 
             // DeleteBtn
             // 
@@ -138,6 +146,7 @@
             DeleteBtn.TabIndex = 9;
             DeleteBtn.Text = "Eliminar";
             DeleteBtn.UseVisualStyleBackColor = true;
+            DeleteBtn.Click += DeleteBtn_Click;
             // 
             // AgregarBtn
             // 
@@ -147,6 +156,7 @@
             AgregarBtn.TabIndex = 10;
             AgregarBtn.Text = "Agregar";
             AgregarBtn.UseVisualStyleBackColor = true;
+            AgregarBtn.Click += AgregarBtn_Click;
             // 
             // QuitarBtn
             // 
@@ -156,6 +166,7 @@
             QuitarBtn.TabIndex = 11;
             QuitarBtn.Text = "Quitar";
             QuitarBtn.UseVisualStyleBackColor = true;
+            QuitarBtn.Click += QuitarBtn_Click;
             // 
             // FechaPicker
             // 
@@ -191,7 +202,7 @@
             // ToleranciaCheck
             // 
             ToleranciaCheck.AutoSize = true;
-            ToleranciaCheck.Location = new Point(66, 406);
+            ToleranciaCheck.Location = new Point(66, 433);
             ToleranciaCheck.Name = "ToleranciaCheck";
             ToleranciaCheck.Size = new Size(79, 19);
             ToleranciaCheck.TabIndex = 16;
@@ -221,6 +232,7 @@
             ServData.AllowUserToDeleteRows = false;
             ServData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             ServData.Location = new Point(934, 74);
+            ServData.MultiSelect = false;
             ServData.Name = "ServData";
             ServData.ReadOnly = true;
             ServData.Size = new Size(395, 284);
@@ -244,11 +256,41 @@
             label7.TabIndex = 21;
             label7.Text = "Detalle:";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(69, 398);
+            label9.Name = "label9";
+            label9.Size = new Size(50, 15);
+            label9.TabIndex = 23;
+            label9.Text = "Espacio;";
+            // 
+            // EspacioUp
+            // 
+            EspacioUp.Location = new Point(136, 396);
+            EspacioUp.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            EspacioUp.Name = "EspacioUp";
+            EspacioUp.Size = new Size(120, 23);
+            EspacioUp.TabIndex = 24;
+            // 
+            // LimpiarBtn
+            // 
+            LimpiarBtn.Location = new Point(372, 390);
+            LimpiarBtn.Name = "LimpiarBtn";
+            LimpiarBtn.Size = new Size(75, 23);
+            LimpiarBtn.TabIndex = 25;
+            LimpiarBtn.Text = "Limpiar";
+            LimpiarBtn.UseVisualStyleBackColor = true;
+            LimpiarBtn.Click += LimpiarBtn_Click;
+            // 
             // CitaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1573, 539);
+            Controls.Add(LimpiarBtn);
+            Controls.Add(EspacioUp);
+            Controls.Add(label9);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(ServData);
@@ -275,6 +317,7 @@
             ((System.ComponentModel.ISupportInitialize)CitasData).EndInit();
             ((System.ComponentModel.ISupportInitialize)ServiciosAgreData).EndInit();
             ((System.ComponentModel.ISupportInitialize)ServData).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EspacioUp).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -302,5 +345,8 @@
         private DataGridView ServData;
         private Label label6;
         private Label label7;
+        private Label label9;
+        private NumericUpDown EspacioUp;
+        private Button LimpiarBtn;
     }
 }

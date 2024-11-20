@@ -27,9 +27,10 @@ namespace BDatos.Forms
             abrir.Show();
         }
 
-        private void MenuForm_Load(object sender, EventArgs e)
+        private void CitasBtn_Click(object sender, EventArgs e)
         {
-
+            CitaForm abrir = new CitaForm();
+            abrir.Show();
         }
     }
 }

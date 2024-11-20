@@ -1,4 +1,5 @@
-﻿using BDatos.Models;
+﻿using BDatos.Forms;
+using BDatos.Models;
 using MongoDB.Driver;
 using static BDatos.Models.CitasModel;
 
@@ -71,6 +72,78 @@ namespace BDatos.Data
         }
 
         //Read de cada colección
+        public List<CitasView> GetCitas()
+        {
+            try
+            {
+                var citas = citasCo.Find(_ => true).ToList();
+                return citas.Select(c => new CitasView
+                {
+                    Id = c.id,
+                    ClienteNombre = c.clienteId,
+                    Fecha = c.fecha,
+                    Estado = c.estado,
+                    ToleranciaAplicada = c.toleranciaAplicada
+                }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener citas: {ex.Message}");
+            }
+        }
+        public string GetClienteNombreById(string clienteId)
+        {
+            var cliente = clientesCo.Find(c => c.id == clienteId).FirstOrDefault();
+            return cliente?.Nombre ?? "Desconocido";
+        }
+        public Citas GetCitaById(string citaId)
+        {
+            try
+            {
+                var cita = citasCo.Find(c => c.id == citaId).FirstOrDefault();
+                return cita; // Retorna la cita encontrada o null si no existe
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener la cita con id {citaId}: {ex.Message}");
+            }
+        }
+        public string GetServicioNombreById(string servicioId)
+        {
+            var servicio = servicesCo.Find(s => s.id == servicioId).FirstOrDefault();
+            return servicio?.nombre ?? "Desconocido";
+        }
+
+        //public List<ServicioCita> GetServiciosByCitaId(string citaId)
+        //{
+        //    try
+        //    {
+        //        var cita = citasCo.Find(c => c.id == citaId).FirstOrDefault();
+        //        return cita?.servicios ?? new List<ServicioCita>();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Error al obtener servicios para la cita {citaId}: {ex.Message}");
+        //    }
+        //}
+        public List<ServicioView> GetServiciosByCitaId(string citaId)
+        {
+            var cita = citasCo.Find(c => c.id == citaId).FirstOrDefault();
+            if (cita == null) return new List<ServicioView>();
+
+            return cita.servicios.Select(s => new ServicioView
+            {
+                ServicioNombre = GetServicioNombreById(s.servicioId), // Método para obtener el nombre del servicio
+                EspacioId = s.espacioId,
+                HoraInicio = s.horaInicio,
+                HoraFin = s.horaFin,
+                EmpleadoNombre = s.empleado?.nombre,
+                EmpleadoTelefono = s.empleado?.telefono,
+                EmpleadoCorreo = s.empleado?.correo
+            }).ToList();
+        }
+
+
         public List<Services> ReadDocumentServices()
         {
             try
