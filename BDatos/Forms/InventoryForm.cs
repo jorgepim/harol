@@ -186,8 +186,8 @@ namespace BDatos.Forms
             }
             else
             {
+                LoadDataGridView(FiltrarTxt.Text);
                 InventoryDataGridView.MultiSelect = true;
-                LoadDataGridView(FiltrarTxt.Text.Trim());
             }
         }
         private bool ValidateFields()
